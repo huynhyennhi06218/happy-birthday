@@ -1,1 +1,237 @@
-index.html
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chúc Mừng Sinh Nhật</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            max-width: 600px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            font-size: 4em;
+            color: #fff;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            animation: bounce 1s ease-in-out infinite;
+        }
+
+        .message {
+            font-size: 1.8em;
+            color: #ffd700;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .wishes {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .wishes p {
+            font-size: 1.1em;
+            color: #fff;
+            margin: 12px 0;
+            line-height: 1.6;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .wishes p:first-child {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #FFD700;
+            text-align: center;
+        }
+
+        .wishes p:last-child {
+            color: #FFB6C1;
+            font-style: italic;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .balloons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .balloon {
+            width: 50px;
+            height: 70px;
+            border-radius: 50% 50% 50% 0;
+            position: relative;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .balloon1 { background: #FF6B6B; animation-delay: 0s; }
+        .balloon2 { background: #4ECDC4; animation-delay: 0.5s; }
+        .balloon3 { background: #FFE66D; animation-delay: 1s; }
+        .balloon4 { background: #95E1D3; animation-delay: 1.5s; }
+
+        .balloon::after {
+            content: '';
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 30px;
+            background: #333;
+        }
+
+        .cake {
+            font-size: 5em;
+            margin: 20px 0;
+            animation: bounce 1s ease-in-out infinite;
+            animation-delay: 0.2s;
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #FFD700;
+            pointer-events: none;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-30px); }
+        }
+
+        button {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎉 CHÚC MỪNG SINH NHẬT! 🎉</h1>
+        
+        <div class="balloons">
+            <div class="balloon balloon1"></div>
+            <div class="balloon balloon2"></div>
+            <div class="balloon balloon3"></div>
+            <div class="balloon balloon4"></div>
+        </div>
+
+        <div class="cake">🎂</div>
+
+        <div class="wishes">
+            <p>✨ Sinh nhật vui vẻ ✨</p>
+            <p>💝 Tuổi mới chúc em thành công hơn, vui vẻ và hạnh phúc</p>
+            <p>🌟 Ngày càng phát triển bản thân (cả chiều cao nữa)</p>
+            <p>😄 17 tuổi rồi, nhưng tôi vẫn lớn hơn bạn đấy, đồ con nít!!</p>
+        </div>
+
+        <button onclick="celebrate()">🎊 Hãy Ấn Nút Này! 🎊</button>
+    </div>
+
+    <script>
+        // Tạo pháo hoa (confetti)
+        function celebrate() {
+            for (let i = 0; i < 50; i++) {
+                createConfetti();
+            }
+            playSound();
+        }
+
+        function createConfetti() {
+            const confetti = document.createElement('div');
+            confetti.classList.add('confetti');
+            confetti.style.left = Math.random() * window.innerWidth + 'px';
+            confetti.style.top = -10 + 'px';
+            confetti.style.background = ['#FF6B6B', '#4ECDC4', '#FFE66D', '#95E1D3', '#FFD700', '#FFB6C1'][Math.floor(Math.random() * 6)];
+            document.body.appendChild(confetti);
+
+            let top = 0;
+            let left = parseFloat(confetti.style.left);
+            let speed = Math.random() * 5 + 3;
+            let drift = (Math.random() - 0.5) * 2;
+
+            const fall = setInterval(() => {
+                top += speed;
+                left += drift;
+                confetti.style.top = top + 'px';
+                confetti.style.left = left + 'px';
+                confetti.style.opacity = 1 - (top / window.innerHeight);
+
+                if (top > window.innerHeight) {
+                    clearInterval(fall);
+                    confetti.remove();
+                }
+            }, 20);
+        }
+
+        function playSound() {
+            // Tạo âm thanh mừng rỡ (nếu trình duyệt cho phép)
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+
+            oscillator.frequency.value = 800;
+            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
+
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.2);
+        }
+    </script>
+</body>
+</html>
